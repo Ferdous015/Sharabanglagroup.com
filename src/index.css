@@ -1,0 +1,430 @@
+@import "tailwindcss";
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+}
+
+:root {
+  /* Official Sharabangla Group Brand Palette */
+  --sbg-green:        #1E9B4C;   /* Primary brand green, from ring and S/G letters */
+  --sbg-green-deep:   #0E5C2E;   /* Darker green for hovers, headings on light bg */
+  --sbg-green-forest: #06301A;   /* Very dark green — replaces navy for dark bands */
+  --sbg-green-tint:   #EAF6EE;   /* Very light green wash for alt section backgrounds */
+  --sbg-gold:         #C8A24A;   /* Premium warm gold tone for executive spotlight rings */
+  --sbg-gold-light:   #F3E5AB;   /* Lighter gold highlight */
+  --sbg-gold-deep:    #9A7828;   /* Deep rich gold */
+  --sbg-red:          #E1232B;   /* Accent red from B — strictly limited to 10% usage */
+  --sbg-red-deep:     #B01820;
+  --sbg-charcoal:     #2B2B2B;   /* Headings, from SHARABANGLA / GROUP text */
+  --sbg-grey:         #5A6170;   /* Muted body text */
+  --bg:               #FFFFFF;
+  --bg-alt:           #F6F8F7;
+  --line:             #E2E8E4;
+
+  /* Legacy variable mappings to prevent broken layout utilities */
+  --navy: #06301A;
+  --navy-soft: #0E5C2E;
+  --gold: #1E9B4C;
+  --teal: #1E9B4C;
+  --text: #2B2B2B;
+  --muted: #5A6170;
+
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Custom font utility classes */
+.font-heading {
+  font-family: 'Plus Jakarta Sans', 'Sora', sans-serif;
+}
+
+.font-bangla {
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+}
+
+.font-chinese {
+  font-family: 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+}
+
+/* Logo Integrity Wrapper Rule */
+.logo-lockup {
+  padding: calc(var(--logo-h, 48px) * 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F6F8F7;
+}
+::-webkit-scrollbar-thumb {
+  background: #A3D9B5;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1E9B4C;
+}
+
+/* Custom keyframe animations for BrandFilmIntro */
+@keyframes kenburns {
+  0% { transform: scale(1.12); }
+  100% { transform: scale(1.0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleUp {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Pulse glow for SBG center node */
+@keyframes pulseGlowGreen {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(30, 155, 76, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(30, 155, 76, 0.8);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlowGreen 3s infinite ease-in-out;
+}
+
+/* Gentle CTA Glow Pulse for Website Buttons (Red CTA on Company Details) */
+@keyframes ctaPulseGlowRed {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(225, 35, 43, 0.45), 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 16px 3px rgba(225, 35, 43, 0.6), 0 4px 14px rgba(0, 0, 0, 0.35);
+  }
+}
+
+.animate-cta-pulse-red {
+  animation: ctaPulseGlowRed 2.8s infinite ease-in-out;
+}
+
+@keyframes ctaPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(30, 155, 76, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 14px 2px rgba(30, 155, 76, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.animate-cta-pulse {
+  animation: ctaPulseGlow 2.8s infinite ease-in-out;
+}
+
+/* Rotating Gold Spotlight Ring for Executive Leadership Cards */
+@keyframes spinGoldRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Ken Burns Slow Zoom Effect for Company Hero Headers */
+@keyframes kenBurnsZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-ken-burns {
+  animation: kenBurnsZoom 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Infinite Horizontal Testimonials Marquee (Right-to-Left) */
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Infinite Horizontal Newsroom Marquee (Left-to-Right / বাম থেকে ডান) */
+@keyframes marqueeScrollLTR {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 85s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-locations {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 65s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-ltr {
+  display: flex;
+  width: max-content;
+  animation: marqueeScrollLTR 60s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-directors {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 42s linear infinite;
+  will-change: transform;
+}
+
+.marquee-container:hover .animate-marquee,
+.animate-marquee:hover,
+.locations-marquee-container:hover .animate-marquee-locations,
+.animate-marquee-locations:hover,
+.news-marquee-container:hover .animate-marquee-ltr,
+.animate-marquee-ltr:hover,
+.directors-marquee-container:hover .animate-marquee-directors,
+.animate-marquee-directors:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-locations,
+  .animate-marquee-ltr,
+  .animate-marquee-directors {
+    animation: none !important;
+    transform: none !important;
+  }
+  .animate-ken-burns {
+    animation: none !important;
+    transform: none !important;
+  }
+  .animate-drift-1,
+  .animate-drift-2,
+  .animate-drift-3,
+  .animate-ecosystem-pulse,
+  .animate-cta-pulse,
+  .animate-pulse-glow {
+    animation: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+@keyframes driftSlow1 {
+  0%, 100% { transform: translate(0px, 0px); }
+  50% { transform: translate(14px, -18px); }
+}
+
+@keyframes driftSlow2 {
+  0%, 100% { transform: translate(0px, 0px); }
+  50% { transform: translate(-16px, 12px); }
+}
+
+@keyframes driftSlow3 {
+  0%, 100% { transform: translate(0px, 0px); }
+  50% { transform: translate(12px, 14px); }
+}
+
+@keyframes ecosystemCenterPulse {
+  0%, 100% { opacity: 0.35; transform: scale(1) translate(-50%, -50%); }
+  50% { opacity: 0.55; transform: scale(1.08) translate(-50%, -50%); }
+}
+
+.animate-drift-1 {
+  animation: driftSlow1 24s ease-in-out infinite;
+}
+
+.animate-drift-2 {
+  animation: driftSlow2 28s ease-in-out infinite;
+}
+
+.animate-drift-3 {
+  animation: driftSlow3 22s ease-in-out infinite;
+}
+
+.animate-ecosystem-pulse {
+  transform-origin: top left;
+  animation: ecosystemCenterPulse 8s ease-in-out infinite;
+}
+
+.gold-photo-ring {
+  position: relative;
+  width: 8rem;  /* 128px / w-32 */
+  height: 8rem; /* 128px / h-32 */
+  border-radius: 9999px;
+  padding: 3.5px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(200, 162, 74, 0.25);
+  transition: all 0.3s ease-out;
+}
+
+.gold-photo-ring::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    from 0deg,
+    #C8A24A 0deg,
+    #F3E5AB 60deg,
+    #9A7828 120deg,
+    #C8A24A 180deg,
+    #F3E5AB 240deg,
+    #9A7828 300deg,
+    #C8A24A 360deg
+  );
+  animation: spinGoldRing 10s linear infinite;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+/* Speed up ring rotation on card hover */
+.group:hover .gold-photo-ring::before {
+  animation-duration: 4s;
+}
+
+/* Enhanced gold halo glow on hover */
+.group:hover .gold-photo-ring {
+  box-shadow: 0 0 0 4px rgba(200, 162, 74, 0.35), 0 8px 24px rgba(200, 162, 74, 0.4);
+}
+
+/* Accessibility: Disable rotation for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .gold-photo-ring::before {
+    animation: none !important;
+  }
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus outline accessibility */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--sbg-green);
+  outline-offset: 2px;
+}
+
+/* Corporate Print Styles */
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #111111 !important;
+    font-size: 11pt;
+  }
+
+  /* Hide interactive / non-printable UI */
+  header, footer, nav, button, .no-print, [role="button"] {
+    display: none !important;
+  }
+
+  /* Keep essential layout elements clean */
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  section {
+    page-break-inside: avoid;
+    border-bottom: 1px solid #CCCCCC !important;
+    padding: 20px 0 !important;
+    background: transparent !important;
+    color: #000000 !important;
+  }
+
+  h1, h2, h3, h4 {
+    color: var(--sbg-green-deep) !important;
+    page-break-after: avoid;
+  }
+
+  a {
+    text-decoration: underline;
+    color: var(--sbg-green-deep) !important;
+  }
+
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+}
+
+/* Smooth Horizontal Marquee Animation */
+@keyframes marquee-ltr {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes marquee-rtl {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-ltr {
+  display: flex;
+  width: max-content;
+  animation: marquee-ltr 32s linear infinite;
+}
+
+.animate-marquee-rtl {
+  display: flex;
+  width: max-content;
+  animation: marquee-rtl 32s linear infinite;
+}
+
+.pause-on-hover:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-ltr,
+  .animate-marquee-rtl {
+    animation: none;
+  }
+}
+

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Deep Green Background -->
+  <rect width="1200" height="630" fill="#06301A"/>
+
+  <!-- Subtle background grid lines -->
+  <g stroke="#0E5C2E" stroke-width="1" opacity="0.3">
+    <line x1="0" y1="157" x2="1200" y2="157"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="472" x2="1200" y2="472"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+  </g>
+
+  <!-- Centered White Logo Emblem -->
+  <g transform="translate(480, 140)">
+    <svg viewBox="0 0 500 500" width="240" height="240">
+      <defs>
+        <path id="topTextArc" d="M 85,250 A 165,165 0 0,1 415,250" fill="none"/>
+        <path id="bottomTextArc" d="M 415,250 A 165,165 0 0,1 85,250" fill="none"/>
+      </defs>
+      <path d="M 52,228 A 200,200 0 0,1 448,228" fill="none" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+      <path d="M 448,272 A 200,200 0 0,1 52,272" fill="none" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+      <line x1="48" y1="250" x2="115" y2="250" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round"/>
+      <line x1="385" y1="250" x2="452" y2="250" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round"/>
+      <text font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="34" fill="#FFFFFF" letter-spacing="4">
+        <textPath href="#topTextArc" startOffset="50%" text-anchor="middle">SHARABANGLA</textPath>
+      </text>
+      <text font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="36" fill="#FFFFFF" letter-spacing="8">
+        <textPath href="#bottomTextArc" startOffset="50%" text-anchor="middle">GROUP</textPath>
+      </text>
+      <g transform="translate(100, 195)" fill="#FFFFFF">
+        <path d="M 30,22 C 30,10 45,0 72,0 L 105,0 C 112,0 118,6 118,14 L 118,26 C 118,34 112,40 102,40 L 68,40 C 60,40 56,43 56,48 C 56,53 60,56 70,56 L 108,56 C 124,56 136,66 136,82 L 136,92 C 136,108 122,118 95,118 L 32,118 C 16,118 4,106 4,90 L 4,78 C 4,70 10,64 18,64 L 34,64 C 42,64 48,70 48,78 L 48,84 C 48,90 54,94 66,94 L 92,94 C 100,94 104,90 104,84 C 104,78 100,74 88,74 L 46,74 C 24,74 30,52 30,22 Z"/>
+        <polygon points="142,12 154,2 148,28 136,36"/>
+        <polygon points="156,12 168,2 162,28 150,36"/>
+        <path d="M 148,18 L 220,18 C 242,18 254,27 254,42 C 254,52 246,58 232,60 C 250,64 258,74 258,90 C 258,107 244,118 220,118 L 148,118 Z M 180,42 L 212,42 C 220,42 224,38 224,33 C 224,28 220,25 212,25 L 180,25 Z M 180,94 L 216,94 C 225,94 228,89 228,81 C 228,73 225,68 216,68 L 180,68 Z"/>
+        <path d="M 352,24 C 352,10 336,0 308,0 L 278,0 C 254,0 238,14 238,36 L 238,82 C 238,104 254,118 282,118 L 320,118 C 342,118 358,104 358,82 L 358,56 L 298,56 L 298,78 L 324,78 L 324,84 C 324,90 318,94 308,94 L 282,94 C 272,94 268,88 268,80 L 268,38 C 268,30 272,24 282,24 L 308,24 C 318,24 324,28 324,34 L 340,34 C 348,34 352,29 352,24 Z"/>
+      </g>
+    </svg>
+  </g>
+
+  <!-- Title & Tagline Below -->
+  <text x="600" y="440" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="42" fill="#FFFFFF" letter-spacing="3">
+    SHARABANGLA GROUP
+  </text>
+  <text x="600" y="485" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="20" fill="#EAF6EE" letter-spacing="6">
+    CONNECTING BANGLADESH TO GLOBAL TRADE
+  </text>
+
+  <!-- Red Accent Bar -->
+  <rect x="540" y="520" width="120" height="4" rx="2" fill="#E1232B"/>
+</svg>

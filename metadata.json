@@ -1,0 +1,6 @@
+{
+  "name": "SHARABANGLA GROUP",
+  "description": "Official corporate web platform for Sharabangla Group, a Bangladesh-based international business group connecting global trade through e-commerce, logistics, sourcing, and manufacturing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
