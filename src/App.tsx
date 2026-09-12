@@ -6,6 +6,7 @@ import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { Splash } from './components/common/Splash';
 import { ScrollToTop as ScrollToTopButton } from './components/common/ScrollToTop';
+import { ChatbotWidget } from './components/common/ChatbotWidget';
 
 // Public Pages
 import { Home } from './pages/Home';
@@ -30,6 +31,7 @@ import { NewsManager } from './pages/admin/NewsManager';
 import { ContactManager } from './pages/admin/ContactManager';
 import { TestimonialsManager } from './pages/admin/TestimonialsManager';
 import { MediaLibrary } from './pages/admin/MediaLibrary';
+import { ChatbotKnowledgeManager } from './pages/admin/ChatbotKnowledgeManager';
 import { AdminLayout } from './components/admin/AdminLayout';
 import { ProtectedRoute } from './components/admin/ProtectedRoute';
 
@@ -66,6 +68,7 @@ const PublicLayout: React.FC = () => {
       </main>
       <Footer />
       <ScrollToTopButton />
+      <ChatbotWidget />
     </div>
   );
 };
@@ -95,6 +98,7 @@ export default function App() {
               <Route path="testimonials" element={<TestimonialsManager />} />
               <Route path="contact" element={<ContactManager />} />
               <Route path="media" element={<MediaLibrary />} />
+              <Route path="chatbot-knowledge" element={<ChatbotKnowledgeManager />} />
               <Route path="*" element={<AdminDashboard />} />
             </Route>
 

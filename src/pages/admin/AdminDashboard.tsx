@@ -6,6 +6,7 @@ import {
   PhoneCall,
   MessageSquareQuote,
   Image as ImageIcon,
+  Bot,
   CheckCircle2,
   Database,
   CloudUpload,
@@ -19,6 +20,7 @@ import { getNewsFromFirestore } from '../../services/newsService';
 import { getSiteInfoFromFirestore } from '../../services/contactService';
 import { getTestimonialsFromFirestore } from '../../services/testimonialsService';
 import { getMediaItemsFromFirestore } from '../../services/mediaLibraryService';
+import { getChatbotKnowledgeFromFirestore } from '../../services/chatbotService';
 import { JobPosition, NewsArticle } from '../../data/site';
 
 export const AdminDashboard: React.FC = () => {
@@ -26,23 +28,26 @@ export const AdminDashboard: React.FC = () => {
   const [newsCount, setNewsCount] = useState<number | null>(null);
   const [testimonialsCount, setTestimonialsCount] = useState<number | null>(null);
   const [mediaCount, setMediaCount] = useState<number | null>(null);
+  const [knowledgeCount, setKnowledgeCount] = useState<number | null>(null);
   const [hasContactSettings, setHasContactSettings] = useState<boolean | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function loadStats() {
       try {
-        const [jobs, news, testimonials, media, siteInfo] = await Promise.all([
+        const [jobs, news, testimonials, media, knowledge, siteInfo] = await Promise.all([
           getJobsFromFirestore().catch(() => []),
           getNewsFromFirestore().catch(() => []),
           getTestimonialsFromFirestore().catch(() => []),
           getMediaItemsFromFirestore().catch(() => []),
+          getChatbotKnowledgeFromFirestore().catch(() => []),
           getSiteInfoFromFirestore().catch(() => null)
         ]);
         setJobsCount(Array.isArray(jobs) ? jobs.length : 0);
         setNewsCount(Array.isArray(news) ? news.length : 0);
         setTestimonialsCount(Array.isArray(testimonials) ? testimonials.length : 0);
         setMediaCount(Array.isArray(media) ? media.length : 0);
+        setKnowledgeCount(Array.isArray(knowledge) ? knowledge.length : 0);
         setHasContactSettings(!!siteInfo);
       } catch (err) {
         console.error('Error fetching admin dashboard stats:', err);
@@ -105,6 +110,14 @@ export const AdminDashboard: React.FC = () => {
               <ArrowRight className="w-3.5 h-3.5 ml-1" />
             </Link>
             <Link
+              to="/admin/chatbot-knowledge"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-[#0E5C2E] bg-[#EAF6EE] hover:bg-[#D7EEDB] border border-[#0E5C2E]/20 transition-all shadow-xs"
+            >
+              <Bot className="w-4 h-4" />
+              <span>Chatbot Knowledge</span>
+              <ArrowRight className="w-3.5 h-3.5 ml-1" />
+            </Link>
+            <Link
               to="/admin/contact"
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-[#5A6170] hover:text-[#0E5C2E] bg-white hover:bg-[#F6F8F7] border border-[#E2E8E4] transition-all shadow-xs"
             >
@@ -117,7 +130,7 @@ export const AdminDashboard: React.FC = () => {
       </div>
 
       {/* Quick Overview Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         {/* Card 1: Jobs Module */}
         <Link
           to="/admin/jobs"
@@ -227,6 +240,28 @@ export const AdminDashboard: React.FC = () => {
             Edit corporate headquarters, email, phone, social links, and registered trade offices live in Firestore.
           </p>
         </Link>
+
+        {/* Card 6: Chatbot Knowledge */}
+        <Link
+          to="/admin/chatbot-knowledge"
+          className="p-5 bg-white rounded-2xl border border-[#E2E8E4] shadow-xs hover:border-[#0E5C2E] hover:shadow-md transition-all group block"
+        >
+          <div className="flex items-center justify-between">
+            <div className="w-10 h-10 rounded-xl bg-[#0E5C2E]/10 flex items-center justify-center text-[#0E5C2E] group-hover:scale-105 transition-transform">
+              <Bot className="w-5 h-5" />
+            </div>
+            <span className="text-xs font-bold text-[#0E5C2E] bg-[#EAF6EE] px-2.5 py-1 rounded-md border border-[#0E5C2E]/20 flex items-center gap-1">
+              <span>{loading ? '...' : `${knowledgeCount ?? 0} Documents`}</span>
+            </span>
+          </div>
+          <h3 className="text-base font-bold text-[#2B2B2B] mt-4 group-hover:text-[#0E5C2E] transition-colors flex items-center justify-between">
+            <span>Chatbot Knowledge</span>
+            <ArrowRight className="w-4 h-4 text-[#8C95A6] group-hover:text-[#0E5C2E] group-hover:translate-x-1 transition-all" />
+          </h3>
+          <p className="text-xs text-[#5A6170] mt-1 leading-normal">
+            Manage corporate Q&A answers, subsidiary facts, and multilingual knowledge for the website AI chatbot.
+          </p>
+        </Link>
       </div>
 
       {/* Architecture Details / Status Box */}
@@ -235,7 +270,7 @@ export const AdminDashboard: React.FC = () => {
           <Layers className="w-4 h-4 text-[#0E5C2E]" />
           <span>Backend Integration Status</span>
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-xs">
           <div className="p-4 rounded-xl bg-[#FAFCFB] border border-[#E2E8E4] space-y-2">
             <div className="font-bold text-[#0E5C2E] flex items-center gap-1.5">
               <Database className="w-4 h-4" />
@@ -270,6 +305,15 @@ export const AdminDashboard: React.FC = () => {
             </div>
             <p className="text-[#5A6170]">
               Cloudinary CDN integration with categorized image metadata, filename indexing, and instant URL copying.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl bg-[#FAFCFB] border border-[#E2E8E4] space-y-2">
+            <div className="font-bold text-[#0E5C2E] flex items-center gap-1.5">
+              <Database className="w-4 h-4" />
+              <span>Firestore: "chatbotKnowledge"</span>
+            </div>
+            <p className="text-[#5A6170]">
+              Categorized enterprise Q&A repository with EN/BN/ZH content ingested into the Gemini AI chatbot pipeline.
             </p>
           </div>
           <div className="p-4 rounded-xl bg-[#FAFCFB] border border-[#E2E8E4] space-y-2">

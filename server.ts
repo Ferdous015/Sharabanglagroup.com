@@ -3,6 +3,7 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI, Type } from "@google/genai";
 import dotenv from "dotenv";
+import { handleChatMessage } from "./src/server/chatHandler";
 
 dotenv.config();
 
@@ -328,6 +329,33 @@ Inputs:
       console.error("AI Testimonial Translation error:", err);
       return res.status(500).json({
         error: err.message || "Failed to translate testimonial with Gemini AI."
+      });
+    }
+  });
+
+  // Chatbot Assistant API endpoint
+  app.post("/api/chat", async (req, res) => {
+    try {
+      const { message, history, language } = req.body;
+      if (!message || typeof message !== "string" || !message.trim()) {
+        return res.status(400).json({ error: "Message text is required." });
+      }
+
+      const result = await handleChatMessage({
+        message,
+        history: Array.isArray(history) ? history : [],
+        language: typeof language === "string" ? language : "en",
+      });
+
+      return res.json({
+        success: true,
+        reply: result.reply,
+      });
+    } catch (err: any) {
+      console.error("Server /api/chat error:", err);
+      return res.status(500).json({
+        error: err.message || "Internal chatbot error",
+        reply: "I am having trouble connecting right now. Please contact us at sharabangla.group@gmail.com for assistance.",
       });
     }
   });

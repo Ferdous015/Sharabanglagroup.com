@@ -9,6 +9,7 @@ import {
   PhoneCall,
   MessageSquareQuote,
   Image as ImageIcon,
+  Bot,
   LogOut,
   ExternalLink,
   Menu,
@@ -40,6 +41,7 @@ export const AdminLayout: React.FC = () => {
     { id: 'contact', label: 'Contact Info', icon: PhoneCall, path: '/admin/contact' },
     { id: 'testimonials', label: 'Testimonials', icon: MessageSquareQuote, path: '/admin/testimonials' },
     { id: 'media', label: 'Media Library', icon: ImageIcon, path: '/admin/media' },
+    { id: 'chatbot-knowledge', label: 'Chatbot Knowledge', icon: Bot, path: '/admin/chatbot-knowledge' },
   ];
 
   const handleLogout = async () => {
