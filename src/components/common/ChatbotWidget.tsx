@@ -233,11 +233,6 @@ export const ChatbotWidget: React.FC = () => {
   const location = useLocation();
   const { lang } = useLanguage();
 
-  // Exclude from admin routes
-  if (location.pathname.startsWith('/admin')) {
-    return null;
-  }
-
   const [isOpen, setIsOpen] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -414,6 +409,11 @@ export const ChatbotWidget: React.FC = () => {
   };
 
   const currentSuggestions = SUGGESTIONS[lang] || SUGGESTIONS.en;
+
+  // Exclude widget from admin console routes
+  if (location.pathname.startsWith('/admin')) {
+    return null;
+  }
 
   return (
     <>

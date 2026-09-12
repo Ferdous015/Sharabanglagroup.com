@@ -12,12 +12,12 @@ export interface ToastMessage {
 }
 
 export interface ToastNotificationProps {
-  toasts: ToastMessage[];
-  onDismiss: (id: string) => void;
+  toasts?: ToastMessage[];
+  onDismiss?: (id: string) => void;
 }
 
-export const ToastNotification: React.FC<ToastNotificationProps> = ({ toasts, onDismiss }) => {
-  if (toasts.length === 0) return null;
+export const ToastNotification: React.FC<ToastNotificationProps> = ({ toasts = [], onDismiss = () => {} }) => {
+  if (!toasts || toasts.length === 0) return null;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-2.5 max-w-sm w-full pointer-events-none">

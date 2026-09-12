@@ -35,17 +35,25 @@ export const ContactManager: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [saving, setSaving] = useState<boolean>(false);
   const [importing, setImporting] = useState<boolean>(false);
-  const [toast, setToast] = useState<ToastMessage | null>(null);
+  const [toasts, setToasts] = useState<ToastMessage[]>([]);
   const [showImportConfirm, setShowImportConfirm] = useState<boolean>(false);
   const [isSeededDoc, setIsSeededDoc] = useState<boolean>(false);
 
   const showToast = (type: ToastType, title: string, description?: string) => {
-    setToast({
-      id: `toast-${Date.now()}`,
-      type,
-      title,
-      description,
-    });
+    const id = `toast-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
+    setToasts(prev => [
+      ...prev,
+      {
+        id,
+        type,
+        title,
+        message: description || title,
+      },
+    ]);
+  };
+
+  const removeToast = (id: string) => {
+    setToasts(prev => prev.filter(t => t.id !== id));
   };
 
   // Load live siteInfo from Firestore on mount
@@ -172,15 +180,17 @@ export const ContactManager: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto space-y-6 pb-12">
       {/* Toast Notification Component */}
-      <ToastNotification toast={toast} onClose={() => setToast(null)} />
+      <ToastNotification toasts={toasts} onDismiss={removeToast} />
 
       {/* Confirmation Modal for Importing Default Settings */}
       <ConfirmModal
         isOpen={showImportConfirm}
         title="Import Current Default Settings?"
         message="This will overwrite the settings/siteInfo Firestore document with default values from src/data/site.ts. Any unsaved custom changes will be replaced."
-        confirmText={importing ? "Importing..." : "Yes, Import Current"}
-        confirmVariant="primary"
+        confirmText="Yes, Import Current"
+        isLoading={importing}
+        loadingText="Importing..."
+        variant="primary"
         onConfirm={handleImportDefaults}
         onCancel={() => setShowImportConfirm(false)}
       />
